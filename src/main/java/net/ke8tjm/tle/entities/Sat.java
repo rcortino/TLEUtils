@@ -68,4 +68,15 @@ public class Sat {
     public boolean willBeVisible(GroundStationPosition gsp) {
         return satellite.willBeSeen(gsp);
     }
+
+    public SatPassTime getNextPass(GroundStationPosition gsp) throws SatNotFoundException {
+        return getNextPass(gsp, new Date());
+    }
+
+    public SatPassTime getNextPass(GroundStationPosition gsp, Date from) throws SatNotFoundException {
+        PassPredictor passPredictor = new PassPredictor(tle, gsp);
+        return passPredictor.nextSatPass(from);
+    }
+
+
 }
